@@ -2,11 +2,9 @@ import os
 import sys
 import re
 
-
 #print (sys.argv)
 
 path = sys.argv[1]
-
 list = os.listdir(path)
 
 #print (list)
@@ -14,9 +12,7 @@ list = os.listdir(path)
 files_renamed = 0
 files_skipped = 0
 
-
 def main():
-
 
     navigateFileTree(path, list)
     print("File's renamed: " + str(files_renamed))
@@ -31,14 +27,11 @@ def navigateFileTree(workingPath, items):
         print (newPath) 
         if os.path.isdir(newPath):
             newList = os.listdir(newPath)
-            #print ('found directory, recursivly going into: ' + newPath)
             navigateFileTree(newPath, newList)
         elif os.path.isfile(newPath):
             print (rename(newPath))
         else:
             print ('no item')
-
-
 
 def rename(path):
     global files_skipped, files_renamed 
