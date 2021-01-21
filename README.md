@@ -2,36 +2,20 @@
 
 ### Why I made this?
 
-I have writen this script to solve an issue I was facing while restoring windows file history. Due to some issue I was unable to restore the files I had backed up. I managed to remove the duplicate files (versions) using a third party software but the software had no option to remove the UTC timestamp:
+I have writen this script to solve an issue I was facing while restoring windows file history. Due to some issue I was unable to restore the files I had backed up. I managed to remove the duplicate files (versions) using a third party software but the software had no option to remove the UTC timestamp (for e.g. (2019_06_24 05_40_08 UTC)) :
 <br>
 
-***Original files:***
-```
-.gitignore
-Endpoints.txt
-Readme.md
-package-lock.json
-```
-<br>
-
-***Backed Up files:***
-<br>
-```
-(2019_06_24 05_40_08 UTC).gitignore
-Endpoints (2019_06_24 05_40_08 UTC).txt
-Readme (2019_06_24 05_40_08 UTC).md
-package-lock (2019_06_24 05_40_08 UTC).json
-```
 
 This script will fix all the files in a provided directory.
 
-to run this script just install python and run this command:
+to run this script just install python and run this file 
 
 ```
-python rename.py 'absolute/path/to/the/directory/containing/the/files/with/timestamps'
+python rename.py '<absolute path to the folder containing files to be renamed>'
 ```
 
-***When i ran it:***
+***Limitations:***
 ```
-python rename.py '/Users/dylancorbus/Desktop/test'
+1. Unable to process duplicates: The script cannot overwrite files if the file name already exists in the same folder after renaming it. It will skip renaming such files.
+2. It renames all the file even it the timestamp isn't there. This increases the run time.
 ```
