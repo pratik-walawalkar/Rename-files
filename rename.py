@@ -46,7 +46,7 @@ def navigateFileTree(workingPath, items):
             print (rename(newPath))
             
         else:
-            print ('no item',)
+            print ('no item found with UTC timestamp')
 
 def checkFileName(filename):
     '''Return True if timestamp exists in the filename'''
@@ -55,8 +55,6 @@ def checkFileName(filename):
         return True
     else:
         return False
-            print ('no item')
-
 
 def rename(path):
     global files_skipped, files_renamed 
