@@ -2,12 +2,9 @@ import os
 import sys
 import re
 
-
 #print (sys.argv)
 
 path = sys.argv[1]
-
-
 list = os.listdir(path)
 
 #print (list)
@@ -15,6 +12,7 @@ list = os.listdir(path)
 files_renamed = 0
 files_skipped = 0
 total_files_scanned = 0
+
 
 def main():
 
@@ -57,6 +55,8 @@ def checkFileName(filename):
         return True
     else:
         return False
+            print ('no item')
+
 
 def rename(path):
     global files_skipped, files_renamed 
