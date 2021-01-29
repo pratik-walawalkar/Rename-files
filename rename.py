@@ -65,7 +65,7 @@ def time_left():
     
     time_left = ((total_files - total_files_scanned) * time_elapsed())/(total_files_scanned)
     
-    if time_left == 0:
+    if time_left <= 0:
         return ("Completed!!!")
     else:
         return time_left
