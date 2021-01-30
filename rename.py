@@ -1,3 +1,19 @@
+# -*- coding: utf-8 -*-
+
+# =============================================================================
+
+# This script is written to rename the files with UTC timestamp which are added
+# to files while performing windows backup using file history. 
+# Incase the file history gets corrupted then Files can be renamed using this 
+# script after after deleting the duplicates using a third party software
+
+# Created on Thu Jan 21 21:28:42 2021
+
+# @author: Pratik Walawalkar
+
+# =============================================================================
+
+
 import os
 import sys
 import re
@@ -47,6 +63,7 @@ def status(filename):
     curses.initscr().addstr(16, 0,"Time elapsed = " + str(time_conversion(time_elapsed())))
     curses.initscr().addstr(17, 0,"Estimated time left = " + str(time_conversion(time_left())))
     curses.initscr().addstr(18, 0,"------------------------------------------------------------------------------")    
+    curses.initscr().addstr(19, 0,"")  
     
     time.sleep(0.1)
 
