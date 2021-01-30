@@ -5,17 +5,17 @@ import time
 import curses
 
 path = sys.argv[1]
-#path = r"D:\Users\Pratik\OneDrive - stud.th-deg.de\Documents\GitHub\Rename-files\test"
-#list = os.listdir(path)
 
 files_renamed = 0
 files_skipped = 1
 total_files_scanned = 1
 action = ''
 t0_start = time.time()
+listOfFiles = list()
+
 
 total_files = sum(len(files) for path, directory, files in os.walk(os.path.join(path)))
-listOfFiles = list()
+
 for (dirpath, dirnames, filenames) in os.walk(path):
     listOfFiles += [ os.path.join(dirpath, file) for file in filenames if re.search(r"\(\d\d\d\d_\d\d_\d\d \d\d_\d\d_\d\d UTC\)", os.path.join(dirpath, file))]
 filesWithUTC = len(listOfFiles)
@@ -63,7 +63,7 @@ def time_conversion(time):
 def time_elapsed():
     '''Calculate time elapsed since initiating the code'''
     
-    time_elapsed = (time.time() - t0_start)
+    time_elapsed = (time.time() - t0_start)     #Difference between the program execution end and start time
     return time_elapsed        
         
 def time_left():
@@ -82,15 +82,15 @@ def navigateFileTree(listOfFiles):
    
     for item in listOfFiles:
   
-        status(item)
-        action = rename(item)
-        total_files_scanned += 1
+        status(item)                             #exeute the code for user interface
+        action = rename(item)                    #save action performed on a file as a string
+        total_files_scanned += 1                 #count the total files scanned
                     
 def checkFileName(filename):
     '''Return True if timestamp exists in the filename'''
     
     if re.search(r"\(\d\d\d\d_\d\d_\d\d \d\d_\d\d_\d\d UTC\)", filename):
-        return True
+        return True                              #return true if UTC timestamp exists
     else:
         return False
 
@@ -101,22 +101,21 @@ def rename(path):
     if os.path.isfile(path):
 
         src = path
-        dst = re.sub(r" ?\(\d\d\d\d_\d\d_\d\d \d\d_\d\d_\d\d UTC\)", "", src, flags=re.I)
-        #os.system('chflags nouchg {}'.format(src))
+        dst = re.sub(r" ?\(\d\d\d\d_\d\d_\d\d \d\d_\d\d_\d\d UTC\)", "", src, flags=re.I)   #subtract UTC timestamp from the file name
 	
         if os.path.exists(dst):
             '''Execute if a file with the same name already exist'''
-            files_skipped += 1 
+            files_skipped += 1                                          #count the number of files skipped
 
             return "The filename already exists "         
                      
         else:
             '''Rename the file '''
-            os.rename(src, dst)
-            files_renamed += 1
+            os.rename(src, dst)                                         #rename the file
+            files_renamed += 1                                          #count the number of files renamed
 
-            head_src, tail_src = os.path.split(src)
-            head_dst, tail_dst = os.path.split(dst)
+            head_src, tail_src = os.path.split(src)                     #split the path and filename of source file
+            head_dst, tail_dst = os.path.split(dst)                     #split the path and filename of renamed file
             return 'Renamed {src} >>TO>> {dst}\r'.format(src=tail_src, dst=tail_dst)
     else:
         return 'The Path You Entered is not Valid' + path
@@ -124,9 +123,9 @@ def rename(path):
 def progressBar(total_files_scanned, total_files, decimals = 1, length = 50, fill = '█', printEnd = "\r"):
     '''Block of code which represents the process bar'''
       
-    percent = round(100*(total_files_scanned/float(filesWithUTC)), 2)
-    filled_length = int(length * total_files_scanned // filesWithUTC)
-    progress_bar = fill * filled_length + '-' * (length - filled_length)
+    percent = round(100*(total_files_scanned/float(filesWithUTC)), 2)   #calculate the percent of process completed
+    filled_length = int(length * total_files_scanned // filesWithUTC)   #calculate the length of filled bar
+    progress_bar = fill * filled_length + '-' * (length - filled_length)#design process bar
     return f'Progress |{progress_bar}| {percent}% complete'
         
     if total_files_scanned == total_files: 
