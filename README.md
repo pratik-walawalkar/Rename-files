@@ -1,6 +1,6 @@
 # File-Rename-Script
 
-### Why I made this?
+### Whats the purpose?
 
 I have writen this script to solve an issue I was facing while restoring windows file history. Due to some issue I was unable to restore the files I had backed up. I managed to remove the duplicate files (versions) using a third party software but the software had no option to remove the UTC timestamp (for e.g. (2019_06_24 05_40_08 UTC)) :
 <br>
