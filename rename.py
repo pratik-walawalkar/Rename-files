@@ -30,8 +30,10 @@ t0_start = time.time()
 listOfFiles = list()
 
 
+#Find total no. of files in the given directory
 total_files = sum(len(files) for path, directory, files in os.walk(os.path.join(path)))
 
+#Add the files with UTC timestam to the list of files to be renamed
 for (dirpath, dirnames, filenames) in os.walk(path):
     listOfFiles += [ os.path.join(dirpath, file) for file in filenames if re.search(r"\(\d\d\d\d_\d\d_\d\d \d\d_\d\d_\d\d UTC\)", os.path.join(dirpath, file))]
 filesWithUTC = len(listOfFiles)
@@ -43,7 +45,7 @@ def main():
     
 def status(filename):
     
-    curses.initscr().clear()
+    curses.initscr().erase()
     curses.initscr().addstr(0, 0,"------------------------------------------------------------------------------")
     curses.initscr().addstr(1, 0,"File's renamed                                     :" + str(files_renamed))
     curses.initscr().addstr(2, 0,"Filename already exists                            :" + str(files_skipped))
@@ -65,7 +67,7 @@ def status(filename):
     curses.initscr().addstr(18, 0,"------------------------------------------------------------------------------")    
     curses.initscr().addstr(19, 0,"")  
     
-    time.sleep(0.1)
+    #time.sleep(0.1)
 
 def time_conversion(time):
     '''Convert time to hh mm ss format'''
